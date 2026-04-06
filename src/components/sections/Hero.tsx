@@ -1,16 +1,17 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+import { motion, type Variants } from "framer-motion";
+import { ArrowDown, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/data";
+import { GithubIcon, LinkedinIcon } from "@/components/SocialIcons";
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.12, duration: 0.6, ease: "easeOut" },
+    transition: { delay: i * 0.12, duration: 0.6, ease: "easeOut" as const },
   }),
 };
 
@@ -122,7 +123,7 @@ export default function Hero() {
             aria-label="GitHub"
             className="p-2.5 rounded-full border border-border hover:border-primary hover:text-primary hover:bg-primary/10 text-muted-foreground transition-all duration-200"
           >
-            <Github className="w-5 h-5" />
+            <GithubIcon className="w-5 h-5" />
           </a>
           <a
             href={siteConfig.linkedin}
@@ -131,7 +132,7 @@ export default function Hero() {
             aria-label="LinkedIn"
             className="p-2.5 rounded-full border border-border hover:border-primary hover:text-primary hover:bg-primary/10 text-muted-foreground transition-all duration-200"
           >
-            <Linkedin className="w-5 h-5" />
+            <LinkedinIcon className="w-5 h-5" />
           </a>
           <a
             href={`mailto:${siteConfig.email}`}
