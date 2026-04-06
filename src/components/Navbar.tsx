@@ -14,15 +14,31 @@ const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
+const sectionIds = navLinks.map((l) => l.href.replace("#", ""));
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+
+      let current = "";
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 100) {
+          current = id;
+        }
+      }
+      setActiveSection(current);
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -54,16 +70,24 @@ export default function Navbar() {
 
         {/* Desktop Links */}
         <ul className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <button
-                onClick={() => handleNavClick(link.href)}
-                className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
-              >
-                {link.label}
-              </button>
-            </li>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.href.replace("#", "");
+            return (
+              <li key={link.href}>
+                <button
+                  onClick={() => handleNavClick(link.href)}
+                  className={cn(
+                    "px-4 py-2 text-sm font-medium rounded-md transition-colors",
+                    isActive
+                      ? "text-primary bg-primary/10"
+                      : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                  )}
+                >
+                  {link.label}
+                </button>
+              </li>
+            );
+          })}
         </ul>
 
         {/* Right side */}
