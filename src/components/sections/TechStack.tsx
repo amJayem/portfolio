@@ -25,8 +25,11 @@ const iconMap: Record<string, string> = {
   postgresql: "https://cdn.simpleicons.org/postgresql",
   prisma: "https://cdn.simpleicons.org/prisma",
   mongodb: "https://cdn.simpleicons.org/mongodb",
+  mongoose: "https://cdn.simpleicons.org/mongoose",
   express: "https://cdn.simpleicons.org/express",
 };
+
+const darkIcons = new Set(["nextjs", "express", "prisma"]);
 
 export default function TechStack() {
   return (
@@ -65,19 +68,11 @@ export default function TechStack() {
             >
               <div className="w-10 h-10 relative flex items-center justify-center">
                 <Image
-                  src={
-                    tech.icon === "nextjs" || tech.icon === "express"
-                      ? `${iconMap[tech.icon]}/ffffff`
-                      : iconMap[tech.icon]
-                  }
+                  src={iconMap[tech.icon]}
                   alt={tech.name}
                   width={40}
                   height={40}
-                  className={
-                    tech.icon === "nextjs" || tech.icon === "express"
-                      ? "dark:invert-0 invert"
-                      : ""
-                  }
+                  className={darkIcons.has(tech.icon) ? "dark:invert invert-0" : ""}
                   unoptimized
                 />
               </div>

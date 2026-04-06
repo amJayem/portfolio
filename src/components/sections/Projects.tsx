@@ -53,7 +53,7 @@ export default function Projects() {
               className="group relative flex flex-col rounded-2xl border border-border bg-card hover:border-primary/50 hover:shadow-lg transition-all duration-300 overflow-hidden"
             >
               {/* Top accent bar */}
-              <div className="h-1 w-full bg-gradient-to-r from-primary/80 via-primary to-primary/40" />
+              <div className="h-1 w-full bg-linear-to-r from-primary/80 via-primary to-primary/40" />
 
               <div className="flex flex-col flex-1 p-6 gap-4">
                 {/* Header */}

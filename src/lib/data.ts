@@ -30,6 +30,7 @@ export const techStack: TechItem[] = [
   { name: "PostgreSQL", icon: "postgresql", color: "#336791" },
   { name: "Prisma", icon: "prisma", color: "#2D3748" },
   { name: "MongoDB", icon: "mongodb", color: "#47A248" },
+  { name: "Mongoose", icon: "mongoose", color: "#880000" },
   { name: "Express", icon: "express", color: "#000000" },
 ];
 
@@ -119,16 +120,14 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     category: "Database",
-    skills: ["PostgreSQL", "MongoDB", "Redis", "Prisma ORM", "SQL", "NoSQL"],
+    skills: ["PostgreSQL", "MongoDB", "Mongoose", "Redis", "Prisma ORM", "SQL", "NoSQL"],
   },
   {
     category: "Tools & DevOps",
     skills: [
       "Git",
-      "Docker",
       "GitHub Actions",
       "Vercel",
-      "AWS (basics)",
       "Linux",
       "Postman",
     ],
