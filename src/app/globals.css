@@ -109,4 +109,9 @@
   html {
     @apply font-sans scroll-smooth;
   }
+  button,
+  a,
+  [role="button"] {
+    @apply cursor-pointer;
+  }
 }
