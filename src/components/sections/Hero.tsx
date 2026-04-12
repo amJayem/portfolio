@@ -1,6 +1,12 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import {
+  motion,
+  type Variants,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+} from "framer-motion";
 import { ArrowDown, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/data";
@@ -15,16 +21,32 @@ const fadeUp: Variants = {
   }),
 };
 
+const blobLayer =
+  "pointer-events-none absolute -z-10 transform-gpu will-change-transform rounded-full blur-2xl";
+
 export default function Hero() {
+  const { scrollY } = useScroll();
+  const reduceMotion = useReducedMotion();
+  const disableParallax = reduceMotion === true;
+
+  // Parallax only on blobs (GPU-friendly). No content parallax — it fights smooth scrolling.
+  const y1 = disableParallax ? [0, 0] : [0, -90];
+  const y2 = disableParallax ? [0, 0] : [0, 70];
+  const y3 = disableParallax ? [0, 0] : [0, -45];
+
+  const blob1Y = useTransform(scrollY, [0, 500], y1);
+  const blob2Y = useTransform(scrollY, [0, 500], y2);
+  const blob3Y = useTransform(scrollY, [0, 500], y3);
+
   const scrollTo = (id: string) => {
     document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden">
-      {/* Background grid */}
+    <section className="relative isolate min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden">
+      {/* Background grid — static paint layer */}
       <div
-        className="absolute inset-0 -z-10 opacity-40 dark:opacity-20"
+        className="absolute inset-0 -z-10 opacity-30 dark:opacity-15"
         style={{
           backgroundImage:
             "linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px)",
@@ -32,24 +54,33 @@ export default function Hero() {
         }}
       />
 
-      {/* Gradient blobs */}
-      <div className="absolute -z-10 top-1/4 left-1/4 w-72 h-72 bg-primary/20 rounded-full blur-3xl" />
-      <div className="absolute -z-10 bottom-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+      {/* Parallax blobs — lighter blur + GPU layer */}
+      <motion.div
+        style={{ y: blob1Y }}
+        className={`${blobLayer} top-1/4 left-1/4 w-80 h-80 bg-primary/25`}
+      />
+      <motion.div
+        style={{ y: blob2Y }}
+        className={`${blobLayer} bottom-1/4 right-1/4 w-96 h-96 bg-violet-500/15`}
+      />
+      <motion.div
+        style={{ y: blob3Y }}
+        className={`${blobLayer} top-1/2 right-1/3 w-64 h-64 bg-cyan-500/10`}
+      />
 
+      {/* Hero copy stays fixed to scroll — reads smoother */}
       <div className="max-w-4xl mx-auto text-center space-y-6">
-        {/* Status badge */}
         <motion.div
           custom={0}
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-primary text-sm font-medium border-primary/20"
         >
           <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
           Available for opportunities
         </motion.div>
 
-        {/* Name */}
         <motion.h1
           custom={1}
           variants={fadeUp}
@@ -61,7 +92,6 @@ export default function Hero() {
           <span className="text-primary">{siteConfig.name}</span>
         </motion.h1>
 
-        {/* Title */}
         <motion.p
           custom={2}
           variants={fadeUp}
@@ -72,7 +102,6 @@ export default function Hero() {
           {siteConfig.title}
         </motion.p>
 
-        {/* Tagline */}
         <motion.p
           custom={3}
           variants={fadeUp}
@@ -83,7 +112,6 @@ export default function Hero() {
           {siteConfig.tagline}
         </motion.p>
 
-        {/* CTA Buttons */}
         <motion.div
           custom={4}
           variants={fadeUp}
@@ -101,50 +129,39 @@ export default function Hero() {
           <Button
             size="lg"
             variant="outline"
-            className="rounded-full px-8 font-semibold"
+            className="rounded-full px-8 font-semibold glass"
             onClick={() => scrollTo("#contact")}
           >
             Contact Me
           </Button>
         </motion.div>
 
-        {/* Social links */}
         <motion.div
           custom={5}
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="flex items-center justify-center gap-4 pt-2"
+          className="flex items-center justify-center gap-3 pt-2"
         >
-          <a
-            href={siteConfig.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-            className="p-2.5 rounded-full border border-border hover:border-primary hover:text-primary hover:bg-primary/10 text-muted-foreground transition-all duration-200"
-          >
-            <GithubIcon className="w-5 h-5" />
-          </a>
-          <a
-            href={siteConfig.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className="p-2.5 rounded-full border border-border hover:border-primary hover:text-primary hover:bg-primary/10 text-muted-foreground transition-all duration-200"
-          >
-            <LinkedinIcon className="w-5 h-5" />
-          </a>
-          <a
-            href={`mailto:${siteConfig.email}`}
-            aria-label="Email"
-            className="p-2.5 rounded-full border border-border hover:border-primary hover:text-primary hover:bg-primary/10 text-muted-foreground transition-all duration-200"
-          >
-            <Mail className="w-5 h-5" />
-          </a>
+          {[
+            { href: siteConfig.github, label: "GitHub", icon: <GithubIcon className="w-5 h-5" /> },
+            { href: siteConfig.linkedin, label: "LinkedIn", icon: <LinkedinIcon className="w-5 h-5" /> },
+            { href: `mailto:${siteConfig.email}`, label: "Email", icon: <Mail className="w-5 h-5" /> },
+          ].map(({ href, label, icon }) => (
+            <a
+              key={label}
+              href={href}
+              target={href.startsWith("mailto") ? undefined : "_blank"}
+              rel="noopener noreferrer"
+              aria-label={label}
+              className="p-2.5 rounded-full glass text-muted-foreground hover:text-primary hover:border-primary/40 transition-colors duration-200"
+            >
+              {icon}
+            </a>
+          ))}
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

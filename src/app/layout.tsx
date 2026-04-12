@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import ScrollProgress from "@/components/ScrollProgress";
 import BackToTop from "@/components/BackToTop";
+import ClickRipple from "@/components/ClickRipple";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -95,6 +96,7 @@ export default function RootLayout({
           disableTransitionOnChange={false}
         >
           <ScrollProgress />
+          <ClickRipple />
           {children}
           <BackToTop />
           <Toaster richColors position="bottom-right" />

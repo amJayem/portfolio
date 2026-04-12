@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 import { Moon, Sun, Menu, X, Code2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useScrollRaf } from "@/lib/scroll-raf";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -23,25 +24,31 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState("");
   const { theme, setTheme } = useTheme();
 
+  const scrollState = useRef({ scrolled: false, active: "" });
+
   useEffect(() => {
     setMounted(true);
-
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-
-      let current = "";
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (el && el.getBoundingClientRect().top <= 100) {
-          current = id;
-        }
-      }
-      setActiveSection(current);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useScrollRaf(() => {
+    const nextScrolled = window.scrollY > 20;
+    let current = "";
+    for (const id of sectionIds) {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= 100) {
+        current = id;
+      }
+    }
+    const prev = scrollState.current;
+    if (nextScrolled !== prev.scrolled) {
+      prev.scrolled = nextScrolled;
+      setScrolled(nextScrolled);
+    }
+    if (current !== prev.active) {
+      prev.active = current;
+      setActiveSection(current);
+    }
+  });
 
   const handleNavClick = (href: string) => {
     setMobileOpen(false);
@@ -52,9 +59,9 @@ export default function Navbar() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 transition-[background-color,box-shadow,border-color] duration-300",
         scrolled
-          ? "bg-background/80 backdrop-blur-md border-b border-border shadow-sm"
+          ? "bg-background/80 backdrop-blur-sm border-b border-border shadow-sm"
           : "bg-transparent"
       )}
     >
@@ -126,7 +133,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-md border-b border-border px-4 pb-4">
+        <div className="md:hidden bg-background/95 backdrop-blur-sm border-b border-border px-4 pb-4">
           <ul className="flex flex-col gap-1 pt-2">
             {navLinks.map((link) => (
               <li key={link.href}>

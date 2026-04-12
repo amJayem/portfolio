@@ -1,17 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useRef } from "react";
 import { ArrowUp } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useScrollRaf } from "@/lib/scroll-raf";
 
 export default function BackToTop() {
   const [visible, setVisible] = useState(false);
+  const visibleRef = useRef(false);
 
-  useEffect(() => {
-    const handleScroll = () => setVisible(window.scrollY > 400);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  useScrollRaf(() => {
+    const next = window.scrollY > 400;
+    if (next !== visibleRef.current) {
+      visibleRef.current = next;
+      setVisible(next);
+    }
+  });
 
   return (
     <button

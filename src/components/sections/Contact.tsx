@@ -99,7 +99,7 @@ export default function Contact() {
                 <a
                   key={label}
                   href={href}
-                  className="flex items-center gap-4 p-4 rounded-xl border border-border bg-card hover:border-primary/50 hover:bg-accent/50 transition-all duration-200 group"
+                  className="flex items-center gap-4 p-4 rounded-xl glass hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-200 group"
                 >
                   <div className="p-2.5 rounded-lg bg-primary/10 text-primary">
                     <Icon className="w-5 h-5" />
@@ -114,7 +114,7 @@ export default function Contact() {
               ))}
 
               {/* Location */}
-              <div className="flex items-center gap-4 p-4 rounded-xl border border-border bg-card">
+              <div className="flex items-center gap-4 p-4 rounded-xl glass">
                 <div className="p-2.5 rounded-lg bg-primary/10 text-primary">
                   <MapPin className="w-5 h-5" />
                 </div>
@@ -134,7 +134,7 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="GitHub"
-                  className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-border bg-card hover:border-primary/50 hover:bg-accent/50 text-sm font-medium transition-all duration-200"
+                  className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl glass hover:border-primary/40 text-sm font-medium transition-all duration-200"
                 >
                   <GithubIcon className="w-4 h-4" />
                   GitHub
@@ -144,7 +144,7 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
-                  className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-border bg-card hover:border-primary/50 hover:bg-accent/50 text-sm font-medium transition-all duration-200"
+                  className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl glass hover:border-primary/40 text-sm font-medium transition-all duration-200"
                 >
                   <LinkedinIcon className="w-4 h-4" />
                   LinkedIn
@@ -160,7 +160,7 @@ export default function Contact() {
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             onSubmit={handleSubmit}
-            className="space-y-5 p-6 rounded-2xl border border-border bg-card"
+            className="space-y-5 p-6 rounded-2xl glass-strong"
           >
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="space-y-2">

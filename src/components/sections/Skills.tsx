@@ -74,7 +74,7 @@ export default function Skills() {
               <motion.div
                 key={cat.category}
                 variants={cardVariant}
-                className="p-6 rounded-2xl border border-border bg-card hover:border-primary/40 hover:shadow-md transition-all duration-300"
+                className="p-6 rounded-2xl glass hover:border-primary/30 hover:-translate-y-1 transition-all duration-300"
               >
                 {/* Category header */}
                 <div className="flex items-center gap-3 mb-5">

@@ -115,3 +115,19 @@
     @apply cursor-pointer;
   }
 }
+
+@layer utilities {
+  /* Lighter blur keeps scroll compositing smooth; opacity carries the glass look */
+  .glass {
+    @apply bg-white/70 dark:bg-white/10
+           backdrop-blur-sm
+           border border-black/10 dark:border-white/10
+           shadow-lg shadow-black/5 dark:shadow-black/20;
+  }
+  .glass-strong {
+    @apply bg-white/85 dark:bg-white/12
+           backdrop-blur-md
+           border border-black/10 dark:border-white/15
+           shadow-xl shadow-black/10 dark:shadow-black/30;
+  }
+}

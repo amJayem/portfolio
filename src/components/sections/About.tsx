@@ -78,7 +78,7 @@ export default function About() {
             {highlights.map(({ icon: Icon, label, desc }) => (
               <div
                 key={label}
-                className="flex items-start gap-4 p-5 rounded-xl border border-border bg-card hover:border-primary/50 hover:shadow-sm transition-all duration-200"
+                className="flex items-start gap-4 p-5 rounded-xl glass hover:border-primary/30 hover:-translate-y-0.5 transition-all duration-200"
               >
                 <div className="p-2.5 rounded-lg bg-primary/10 text-primary shrink-0">
                   <Icon className="w-5 h-5" />

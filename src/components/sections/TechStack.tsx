@@ -64,7 +64,7 @@ export default function TechStack() {
             <motion.div
               key={tech.name}
               variants={item}
-              className="group flex flex-col items-center gap-3 p-4 rounded-xl border border-border bg-card hover:border-primary/50 hover:shadow-md hover:-translate-y-1 transition-all duration-200 cursor-default"
+              className="group flex flex-col items-center gap-3 p-4 rounded-xl glass hover:border-primary/40 hover:shadow-primary/10 hover:-translate-y-1.5 transition-all duration-200 cursor-default"
             >
               <div className="w-10 h-10 relative flex items-center justify-center">
                 <Image

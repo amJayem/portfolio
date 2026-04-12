@@ -50,7 +50,7 @@ export default function Projects() {
             <motion.div
               key={project.id}
               variants={cardVariant}
-              className="group relative flex flex-col rounded-2xl border border-border bg-card hover:border-primary/50 hover:shadow-lg transition-all duration-300 overflow-hidden"
+              className="group relative flex flex-col rounded-2xl glass hover:border-primary/40 hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
             >
               {/* Top accent bar */}
               <div className="h-1 w-full bg-linear-to-r from-primary/80 via-primary to-primary/40" />
