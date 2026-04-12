@@ -2,10 +2,10 @@ export const siteConfig = {
   name: "Asif Mahmud Jayem",
   title: "Full Stack Developer",
   tagline: "Building scalable web applications with modern technologies",
-  email: "asifmahmud@example.com",
-  github: "https://github.com/asifmahmud-jayem",
-  linkedin: "https://linkedin.com/in/asifmahmud-jayem",
-  location: "Bangladesh",
+  email: "csejayem19@gmail.com",
+  github: "https://github.com/amJayem",
+  linkedin: "https://www.linkedin.com/in/amjayem/",
+  location: "Dhaka, Bangladesh",
 };
 
 export const aboutText = {
@@ -51,7 +51,7 @@ export const projects: Project[] = [
     description:
       "A full-stack e-commerce platform with product management, cart functionality, payment integration via Stripe, and an admin dashboard. Features real-time inventory updates and order tracking.",
     techStack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Stripe"],
-    githubUrl: "https://github.com/asifmahmud-jayem/ecommerce-platform",
+    githubUrl: "https://github.com/amJayem/ecommerce-platform",
     liveUrl: "https://ecommerce.example.com",
     featured: true,
   },
@@ -61,7 +61,7 @@ export const projects: Project[] = [
     description:
       "A scalable REST API for team task management with role-based access control, real-time notifications via WebSockets, and comprehensive audit logging.",
     techStack: ["NestJS", "TypeScript", "PostgreSQL", "Redis", "Docker"],
-    githubUrl: "https://github.com/asifmahmud-jayem/task-api",
+    githubUrl: "https://github.com/amJayem/task-api",
     liveUrl: "https://task-api.example.com",
     featured: true,
   },
@@ -71,7 +71,7 @@ export const projects: Project[] = [
     description:
       "A headless CMS and blog platform with markdown support, SEO optimisation, dynamic OG image generation, and a custom admin interface.",
     techStack: ["Next.js", "MongoDB", "Node.js", "TypeScript", "TailwindCSS"],
-    githubUrl: "https://github.com/asifmahmud-jayem/blog-cms",
+    githubUrl: "https://github.com/amJayem/blog-cms",
     liveUrl: "https://blog.example.com",
     featured: false,
   },
@@ -81,7 +81,7 @@ export const projects: Project[] = [
     description:
       "A real-time messaging application with channels, direct messages, file uploads, and emoji reactions powered by Socket.io and MongoDB.",
     techStack: ["React", "Node.js", "Socket.io", "MongoDB", "Express"],
-    githubUrl: "https://github.com/asifmahmud-jayem/chat-app",
+    githubUrl: "https://github.com/amJayem/chat-app",
     liveUrl: "https://chat.example.com",
     featured: false,
   },
