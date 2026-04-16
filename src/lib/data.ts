@@ -40,50 +40,38 @@ export interface Project {
   description: string;
   techStack: string[];
   githubUrl: string;
-  liveUrl: string;
+  /** Public demo URL; omit when only the repo is available */
+  liveUrl?: string;
   featured: boolean;
 }
 
 export const projects: Project[] = [
   {
     id: 1,
-    title: "E-Commerce Platform",
+    title: "E-commerce Platform (Frontend)",
     description:
-      "A full-stack e-commerce platform with product management, cart functionality, payment integration via Stripe, and an admin dashboard. Features real-time inventory updates and order tracking.",
-    techStack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Stripe"],
-    githubUrl: "https://github.com/amJayem/ecommerce-platform",
-    liveUrl: "https://ecommerce.example.com",
+      "Customer-facing storefront with modern UX and scalable architecture — product browsing, cart flows, and a polished checkout experience.",
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS"],
+    githubUrl: "https://github.com/amJayem/ecommerce-web",
     featured: true,
   },
   {
     id: 2,
-    title: "Task Management API",
+    title: "Admin Dashboard",
     description:
-      "A scalable REST API for team task management with role-based access control, real-time notifications via WebSockets, and comprehensive audit logging.",
-    techStack: ["NestJS", "TypeScript", "PostgreSQL", "Redis", "Docker"],
-    githubUrl: "https://github.com/amJayem/task-api",
-    liveUrl: "https://task-api.example.com",
+      "Role-based admin panel for managing products, users, and store operations with a fast, maintainable SPA architecture.",
+    techStack: ["React", "Vite", "TypeScript"],
+    githubUrl: "https://github.com/amJayem/ecommerce-dashboard-r",
     featured: true,
   },
   {
     id: 3,
-    title: "Blog & CMS Platform",
+    title: "Backend & Authentication System",
     description:
-      "A headless CMS and blog platform with markdown support, SEO optimisation, dynamic OG image generation, and a custom admin interface.",
-    techStack: ["Next.js", "MongoDB", "Node.js", "TypeScript", "TailwindCSS"],
-    githubUrl: "https://github.com/amJayem/blog-cms",
-    liveUrl: "https://blog.example.com",
-    featured: false,
-  },
-  {
-    id: 4,
-    title: "Real-Time Chat App",
-    description:
-      "A real-time messaging application with channels, direct messages, file uploads, and emoji reactions powered by Socket.io and MongoDB.",
-    techStack: ["React", "Node.js", "Socket.io", "MongoDB", "Express"],
-    githubUrl: "https://github.com/amJayem/chat-app",
-    liveUrl: "https://chat.example.com",
-    featured: false,
+      "Production-ready REST API with authentication, authorization, and core business logic for the e-commerce ecosystem.",
+    techStack: ["NestJS", "PostgreSQL", "Prisma"],
+    githubUrl: "https://github.com/amJayem/ecommerce-backend",
+    featured: true,
   },
 ];
 

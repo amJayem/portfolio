@@ -78,15 +78,17 @@ export default function Projects() {
                     >
                       <GitFork className="w-4 h-4" />
                     </a>
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${project.title} live demo`}
-                      className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
+                    {project.liveUrl ? (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${project.title} live demo`}
+                        className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    ) : null}
                   </div>
                 </div>
 
@@ -110,20 +112,26 @@ export default function Projects() {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={cn(buttonVariants({ variant: "outline", size: "sm" }), "flex-1 gap-1.5")}
+                    className={cn(
+                      buttonVariants({ variant: "outline", size: "sm" }),
+                      "flex-1 gap-1.5",
+                      !project.liveUrl && "w-full"
+                    )}
                   >
                     <GitFork className="w-3.5 h-3.5" />
                     Code
                   </a>
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={cn(buttonVariants({ size: "sm" }), "flex-1 gap-1.5")}
-                  >
-                    <ExternalLink className="w-3.5 h-3.5" />
-                    Live Demo
-                  </a>
+                  {project.liveUrl ? (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={cn(buttonVariants({ size: "sm" }), "flex-1 gap-1.5")}
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      Live Demo
+                    </a>
+                  ) : null}
                 </div>
               </div>
             </motion.div>
